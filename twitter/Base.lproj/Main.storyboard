@@ -185,7 +185,11 @@
                         <viewLayoutGuide key="safeArea" id="ugE-Ul-H9I"/>
                     </view>
                     <navigationItem key="navigationItem" title="Home Timeline" id="MOc-fV-EZE">
-                        <barButtonItem key="leftBarButtonItem" title="Logout" id="Ldj-Jo-gVi"/>
+                        <barButtonItem key="leftBarButtonItem" title="Logout" id="Ldj-Jo-gVi">
+                            <connections>
+                                <action selector="onTapLogout:" destination="Lbl-k5-U4i" id="sks-Cm-KBb"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" image="edit-icon" id="2Dc-Ke-WLZ">
                             <connections>
                                 <segue destination="Dfd-9F-qlQ" kind="presentation" id="mKL-SK-cfj"/>
@@ -216,7 +220,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JHS-35-jFs" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="860" y="36.431784107946029"/>
+            <point key="canvasLocation" x="1105" y="-154"/>
         </scene>
         <!--Compose View Controller-->
         <scene sceneID="FX2-k2-CRP">

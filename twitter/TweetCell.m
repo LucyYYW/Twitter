@@ -10,6 +10,7 @@
 #import "UIImageView+AFNetworking.h"
 #import "APIManager.h"
 
+
 @implementation TweetCell
 
 - (void)awakeFromNib {
@@ -112,6 +113,9 @@
     self.retweetLabel.text = [NSString stringWithFormat:@"%i", self.tweet.retweetCount];
     self.likeLabel.text = [NSString stringWithFormat:@"%i", self.tweet.favoriteCount];
 }
+
+
+
 
 
 
