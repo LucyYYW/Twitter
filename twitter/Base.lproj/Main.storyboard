@@ -246,10 +246,10 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <state key="normal" title="Tweet"/>
+                                <connections>
+                                    <action selector="onTweet:" destination="WVc-hq-lb1" eventType="touchUpInside" id="F3h-4P-kdG"/>
+                                </connections>
                             </button>
-                            <connections>
-                                <action selector="onTweet:" destination="WVc-hq-lb1" id="Vew-m9-s4Z"/>
-                            </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
