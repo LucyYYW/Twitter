@@ -15,8 +15,9 @@
     if (self) {
         self.name = dictionary[@"name"];
         self.screenName = dictionary[@"screen_name"];
+        self.profileImageUrl = dictionary[@"profile_image_url_https"];
         
-        // Initialize any other properties
+        
     }
     return self;
 }

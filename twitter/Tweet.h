@@ -24,10 +24,13 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic) User *user; // Contains name, screenname, etc. of tweet author
 @property (strong, nonatomic) NSString *createdAtString; // Display date
 
+@property (nonatomic) int replyCount;
+
+
 // For Retweets
 @property (strong, nonatomic) User *retweetedByUser;  // user who retweeted if tweet is retweet
 
-
++ (NSMutableArray *)tweetsWithArray:(NSArray *)dictionaries;
 
 @end
 
