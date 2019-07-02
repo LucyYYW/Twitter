@@ -78,6 +78,7 @@
     TweetCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TweetCell"];
     
     Tweet *tweet = self.tweets[indexPath.row];
+    cell.tweet = tweet;
     
     NSURL *url = [NSURL URLWithString:tweet.user.profileImageUrl];
     [cell.profileImageView setImageWithURL:url];
@@ -89,6 +90,17 @@
     cell.retweetLabel.text = [NSString stringWithFormat:@"%i", tweet.retweetCount];
     cell.likeLabel.text = [NSString stringWithFormat:@"%i", tweet.favoriteCount];
     
+    if (tweet.favorited == NO) {
+        [cell.likeButton setImage:[UIImage imageNamed:@"favor-icon.png"] forState:UIControlStateNormal];
+    } else {
+        [cell.likeButton setImage:[UIImage imageNamed:@"favor-icon-red.png"] forState:UIControlStateNormal];
+    }
+    
+    if (tweet.retweeted == NO) {
+        [cell.retweetButton setImage:[UIImage imageNamed:@"retweet-icon.png"] forState:UIControlStateNormal];
+    } else {
+        [cell.retweetButton setImage:[UIImage imageNamed:@"retweet-icon-green.png"] forState:UIControlStateNormal];
+    }
     
     return cell;
 }
@@ -102,6 +114,7 @@
     [self.tweets insertObject: tweet atIndex:0];
     [self.tableView reloadData];
 }
+
 
  #pragma mark - Navigation
  

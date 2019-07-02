@@ -29,7 +29,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UIButton *likeButton;
 
 
-@property (weak, nonatomic) Tweet *tweet;
+@property (strong, nonatomic) Tweet *tweet;
 
 
 @end
