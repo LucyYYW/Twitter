@@ -8,6 +8,7 @@
 
 #import "ComposeViewController.h"
 #import "APIManager.h"
+#import "TimelineViewController.h"
 
 @interface ComposeViewController ()
 @property (weak, nonatomic) IBOutlet UITextView *postTextView;
@@ -27,9 +28,7 @@
     [[APIManager shared] postStatusWithText: self.postTextView.text completion:^(Tweet *tweet, NSError *error) {
         if (tweet) {
             NSLog(@"😎😎😎 Successfully posted a new tweet");
-            
-            //[self dismissViewControllerAnimated:true completion: nil];
-            
+            [self.delegate didTweet:tweet];
             
         } else {
             NSLog(@"😫😫😫 Error posting: %@", error.localizedDescription);
