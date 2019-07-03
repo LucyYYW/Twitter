@@ -24,7 +24,6 @@
 
 - (IBAction)onTweet:(id)sender {
     NSLog(@"tweet clicked");
-    //[[APIManager shared] postStatusWithText: self.postTextView.text];
     [[APIManager shared] postStatusWithText: self.postTextView.text completion:^(Tweet *tweet, NSError *error) {
         if (tweet) {
             NSLog(@"😎😎😎 Successfully posted a new tweet");

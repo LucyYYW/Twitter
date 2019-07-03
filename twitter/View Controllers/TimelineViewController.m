@@ -31,6 +31,9 @@
     self.tableView.delegate = self;
     
     [self getTimeline];
+    self.tableView.rowHeight = UITableViewAutomaticDimension;
+    
+    //self.tableView.estimatedRowHeight = 300; //UITableViewAutomaticDimension;
     
     self.refreshControl = [[UIRefreshControl alloc] init];
     [self.refreshControl addTarget:self action:@selector(getTimeline) forControlEvents:UIControlEventValueChanged];
