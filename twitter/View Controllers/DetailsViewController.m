@@ -144,6 +144,12 @@
     [self.tableView reloadData];
 }
 
+- (void)attributedLabel:(TTTAttributedLabel *)label
+   didSelectLinkWithURL:(NSURL *)url {
+    UIApplication *application = [UIApplication sharedApplication];
+    [application openURL:url options:@{} completionHandler:nil];
+    
+}
 
 /*
 #pragma mark - Navigation
