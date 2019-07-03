@@ -14,8 +14,10 @@
 #import "ComposeViewController.h"
 #import "AppDelegate.h"
 #import "LoginViewController.h"
+#import "DetailsViewController.h"
 
-@interface TimelineViewController () <ComposeViewControllerDelegate,UITableViewDataSource, UITableViewDelegate>
+
+@interface TimelineViewController () <ComposeViewControllerDelegate,UITableViewDataSource, UITableViewDelegate, TTTAttributedLabelDelegate>
 
 @property (nonatomic, strong) NSMutableArray *tweets;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -89,8 +91,18 @@
     [cell.profileImageView setImageWithURL:url];
     cell.userNameLabel.text = tweet.user.name;
     cell.screenNameLabel.text = [@"@" stringByAppendingString: tweet.user.screenName];
-    cell.dateLabel.text = tweet.createdAtString;
+    cell.dateLabel.text = (NSAttributedString *)tweet.createdAtString;
+    
+    
+    cell.tweetTextLabel.enabledTextCheckingTypes = NSTextCheckingTypeLink; // Automatically detect links when the label text is subsequently changed
+    cell.tweetTextLabel.delegate = self;
+    
+    
     cell.tweetTextLabel.text = tweet.text;
+    
+    
+    
+    
     cell.replyLabel.text = [NSString stringWithFormat:@"%i", tweet.replyCount];
     cell.retweetLabel.text = [NSString stringWithFormat:@"%i", tweet.retweetCount];
     cell.likeLabel.text = [NSString stringWithFormat:@"%i", tweet.favoriteCount];
@@ -125,9 +137,19 @@
  
  // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    UINavigationController *navigationController = [segue destinationViewController];
-    ComposeViewController *composeController = (ComposeViewController*)navigationController.topViewController;
-    composeController.delegate = self;
+    if ([segue.identifier  isEqual: @"compose"]) {
+        UINavigationController *navigationController = [segue destinationViewController];
+        ComposeViewController *composeController = (ComposeViewController*)navigationController.topViewController;
+        composeController.delegate = self;
+    } else if ([segue.identifier isEqual: @"details"]) {
+        UITableViewCell *tappedCell = sender;
+        NSIndexPath *indexPath = [self.tableView indexPathForCell:tappedCell];
+        Tweet *tweet = self.tweets[indexPath.row];
+        DetailsViewController *detailsController = [segue destinationViewController];
+        detailsController.tweet = tweet;
+        
+    }
+    
 }
 
 - (IBAction)onTapLogout:(id)sender {
