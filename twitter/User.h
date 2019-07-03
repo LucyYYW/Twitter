@@ -15,6 +15,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic) NSString *name;
 @property (strong, nonatomic) NSString *screenName;
 @property (strong, nonatomic) NSString *profileImageUrl;
+@property (nonatomic) int tweetsCount;
+@property (nonatomic) int followingCount;
+@property (nonatomic) int followerCount;
 
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary;
 

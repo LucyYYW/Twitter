@@ -127,6 +127,18 @@ static NSString * const consumerSecret = @"gct9SqIMVLVrEqu2F08VpXXhCsbdRqSrsw4pO
     }];
 }
 
+- (void) getUserWithScreenname:(NSString *)screenName completion:(void (^)(User *, NSError *))completion {
+    NSString *urlString = [@"1.1/users/show.json?screen_name=" stringByAppendingString:screenName];
+    
+    [self GET:urlString parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary *  _Nullable userDictionary) {
+        User *user = [[User alloc]initWithDictionary:userDictionary];
+        completion(user, nil);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        completion(nil, error);
+    }];
+}
+
+
 - (void)reply:(Tweet *)tweet completion:(void (^)(Tweet *, NSError *))completion{
     
     NSString *urlString = [NSString stringWithFormat:@"****idk*****", tweet.idStr];

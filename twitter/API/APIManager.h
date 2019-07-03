@@ -28,7 +28,7 @@
 
 - (void) replyWithText: (NSString *) text toTweet: (Tweet *)tweet completion:(void (^)(Tweet *, NSError *))completion;
 
-
+- (void)getUserWithScreenname: (NSString *) screenName completion:(void (^) (User *, NSError *))completion;
 
 
 @end
