@@ -10,6 +10,7 @@
 #import "UIImageView+AFNetworking.h"
 #import "APIManager.h"
 #import "tweetCell.h"
+#import "replyViewController.h"
 
 @interface DetailsViewController () <TTTAttributedLabelDelegate>
 
@@ -67,13 +68,14 @@
     if (self.tweet.favorited == NO)
     {
         [likebtn setImage:[UIImage imageNamed:@"favor-icon-red.png"] forState:UIControlStateNormal];
-        self.tweet.favorited = YES;
-        self.tweet.favoriteCount += 1;
+        
         [[APIManager shared] favorite:self.tweet completion:^(Tweet *tweet, NSError *error) {
             if(error){
                 NSLog(@"Error favoriting tweet: %@", error.localizedDescription);
             }
             else{
+                self.tweet.favorited = YES;
+                self.tweet.favoriteCount += 1;
                 NSLog(@"Successfully favorited the following Tweet: %@", tweet.text);
             }
         }];
@@ -81,13 +83,14 @@
     else
     {
         [likebtn setImage:[UIImage imageNamed:@"favor-icon.png"] forState:UIControlStateNormal];
-        self.tweet.favorited = NO;
-        self.tweet.favoriteCount -= 1;
+        
         [[APIManager shared] unfavorite:self.tweet completion:^(Tweet *tweet, NSError *error) {
             if(error){
                 NSLog(@"Error unfavoriting tweet: %@", error.localizedDescription);
             }
             else{
+                self.tweet.favorited = NO;
+                self.tweet.favoriteCount -= 1;
                 NSLog(@"Successfully unfavorited the following Tweet: %@", tweet.text);
             }
         }];
@@ -151,14 +154,17 @@
     
 }
 
-/*
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    UINavigationController *navigationController = [segue destinationViewController];
+    replyViewController *replyController = (replyViewController*)navigationController.topViewController;
+    replyController.tweet = self.tweet;
+    replyController.tableView = self.tableView;
 }
-*/
 
 @end

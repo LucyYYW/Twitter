@@ -22,6 +22,7 @@
 		B97ED30E22CA69AA00024DBC /* TweetCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B97ED30D22CA69AA00024DBC /* TweetCell.m */; };
 		B97ED31122CAE49800024DBC /* ComposeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B97ED31022CAE49800024DBC /* ComposeViewController.m */; };
 		B97ED31422CD09A800024DBC /* DetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B97ED31322CD09A800024DBC /* DetailsViewController.m */; };
+		B9D69E6422CD38EC00F86F14 /* replyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9D69E6322CD38EC00F86F14 /* replyViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -53,6 +54,8 @@
 		B97ED31022CAE49800024DBC /* ComposeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ComposeViewController.m; sourceTree = "<group>"; };
 		B97ED31222CD09A800024DBC /* DetailsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DetailsViewController.h; sourceTree = "<group>"; };
 		B97ED31322CD09A800024DBC /* DetailsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DetailsViewController.m; sourceTree = "<group>"; };
+		B9D69E6222CD38EC00F86F14 /* replyViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = replyViewController.h; sourceTree = "<group>"; };
+		B9D69E6322CD38EC00F86F14 /* replyViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = replyViewController.m; sourceTree = "<group>"; };
 		E12A11AA0D36A74AC2E42782 /* Pods_twitter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_twitter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -154,6 +157,8 @@
 				B97ED31022CAE49800024DBC /* ComposeViewController.m */,
 				B97ED31222CD09A800024DBC /* DetailsViewController.h */,
 				B97ED31322CD09A800024DBC /* DetailsViewController.m */,
+				B9D69E6222CD38EC00F86F14 /* replyViewController.h */,
+				B9D69E6322CD38EC00F86F14 /* replyViewController.m */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -288,6 +293,7 @@
 				6AD278DA20BC4B950085BC29 /* AppDelegate.m in Sources */,
 				6AD278F620BCB68B0085BC29 /* APIManager.m in Sources */,
 				6AD2790920BCC04D0085BC29 /* TimelineViewController.m in Sources */,
+				B9D69E6422CD38EC00F86F14 /* replyViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
