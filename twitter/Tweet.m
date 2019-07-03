@@ -46,16 +46,17 @@
         formatter.dateFormat = @"E MMM d HH:mm:ss Z y";
         // Convert String to Date
         NSDate *date = [formatter dateFromString:createdAtOriginalString];
-        /*
+        
         // Configure output format
-        formatter.dateStyle = NSDateFormatterShortStyle;
-        formatter.timeStyle = NSDateFormatterNoStyle;
+        //formatter.dateStyle = NSDateFormatterShortStyle;
+        //formatter.timeStyle = NSDateFormatterShortStyle;
+        formatter.dateFormat = @"HH:mm  yyyy-MM-dd";
         // Convert Date to String
         self.createdAtString = [formatter stringFromDate:date];
-         */
+        
         
         //Convert to TimeAgo date
-        self.createdAtString = date.shortTimeAgoSinceNow;
+        self.timeAgoString = date.shortTimeAgoSinceNow;
         
     }
     return self;

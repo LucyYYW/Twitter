@@ -15,6 +15,7 @@
 #import "AppDelegate.h"
 #import "LoginViewController.h"
 #import "DetailsViewController.h"
+#import "WebKit/WebKit.h"
 
 
 @interface TimelineViewController () <ComposeViewControllerDelegate,UITableViewDataSource, UITableViewDelegate, TTTAttributedLabelDelegate>
@@ -29,13 +30,19 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    //1. (done in storyboard)View Controller has a tableView as a subview
+    //2. (done in storyboard)Define a custom table view cell and set its reuse identifier
+    //3. View controller becomes its dataSource and delegate in viewDidLoad
+
+
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     
+    //4. Make an API request (usually have it done in an separate function to make it cleaner)
     [self getTimeline];
+    
     self.tableView.rowHeight = UITableViewAutomaticDimension;
     
-    //self.tableView.estimatedRowHeight = 300; //UITableViewAutomaticDimension;
     
     self.refreshControl = [[UIRefreshControl alloc] init];
     [self.refreshControl addTarget:self action:@selector(getTimeline) forControlEvents:UIControlEventValueChanged];
@@ -45,22 +52,18 @@
     
 
 
-    
+//4. Make an API request
 - (void)getTimeline {
     
-    // Get timeline
+    //5. API manager calls the completion handler passing back data
     [[APIManager shared] getHomeTimelineWithCompletion:^(NSArray *tweets, NSError *error) {
         if (tweets) {
             NSLog(@"😎😎😎 Successfully loaded home timeline");
-            /*
-             for (NSDictionary *dictionary in tweets) {
-             NSString *text = dictionary[@"text"];
-             NSLog(@"%@", text);
-             }
-             */
+            
+            //6. View controller stores that data passed into the completion handler
             self.tweets = [tweets mutableCopy];
             
-            // Reload the tableView now that there is new data
+            //7. Reload the tableView now that there is new data
             [self.tableView reloadData];
             
             
@@ -80,8 +83,9 @@
 }
 
 
-
+//8. Tabel view asks its dataSource for cellForRowAt
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
+    // 10. cellForRow returns an instance of the custom cell with that reuse identifier with its elements populated with data at the index asked for
     TweetCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TweetCell"];
     
     Tweet *tweet = self.tweets[indexPath.row];
@@ -91,7 +95,7 @@
     [cell.profileImageView setImageWithURL:url];
     cell.userNameLabel.text = tweet.user.name;
     cell.screenNameLabel.text = [@"@" stringByAppendingString: tweet.user.screenName];
-    cell.dateLabel.text = (NSAttributedString *)tweet.createdAtString;
+    cell.dateLabel.text = (NSAttributedString *)tweet.timeAgoString;
     
     
     cell.tweetTextLabel.enabledTextCheckingTypes = NSTextCheckingTypeLink; // Automatically detect links when the label text is subsequently changed
@@ -100,8 +104,7 @@
     
     cell.tweetTextLabel.text = tweet.text;
     
-    
-    
+
     
     cell.replyLabel.text = [NSString stringWithFormat:@"%i", tweet.replyCount];
     cell.retweetLabel.text = [NSString stringWithFormat:@"%i", tweet.retweetCount];
@@ -122,7 +125,9 @@
     return cell;
 }
 
+//8. Table view asks its dataSource for numberOfRows
 - (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    //9. numberOfRows returns the number of items returned from the API
     return self.tweets.count;
 }
 
@@ -147,6 +152,8 @@
         Tweet *tweet = self.tweets[indexPath.row];
         DetailsViewController *detailsController = [segue destinationViewController];
         detailsController.tweet = tweet;
+        detailsController.tweetCell = (TweetCell *) tappedCell;
+        detailsController.tableView = self.tableView;
         
     }
     
@@ -161,6 +168,13 @@
     
     [[APIManager shared] logout];
     
+}
+
+- (void)attributedLabel:(TTTAttributedLabel *)label
+   didSelectLinkWithURL:(NSURL *)url {
+    UIApplication *application = [UIApplication sharedApplication];
+    [application openURL:url options:@{} completionHandler:nil];
+
 }
 
 @end
