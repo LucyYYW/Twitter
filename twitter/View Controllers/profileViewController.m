@@ -20,6 +20,8 @@
 @property (weak, nonatomic) IBOutlet TTTAttributedLabel *numFollowingLabel;
 @property (weak, nonatomic) IBOutlet TTTAttributedLabel *numFollowersLabel;
 
+@property (strong) UITableView *tweetsTableView;
+
 @end
 
 @implementation profileViewController
@@ -27,10 +29,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    [self getUserInfo];
+}
+
+- (void) getUserInfo {
     [[APIManager shared] getUserWithScreenname: @"MiSuerteCR7" completion:^(User* user, NSError *error) {
         if (user) {
             NSLog(@"😎😎😎 Successfully loaded home timeline");
-         
+            
             [self.profileImageView setImageWithURL:[NSURL URLWithString: user.profileImageUrl]];
             self.userNameLabel.text = user.name;
             self.screenNameLabel.text = [@"@" stringByAppendingString: user.screenName];
@@ -50,6 +56,12 @@
         
     }];
 }
+
+- (void) getUserTweets {
+    
+}
+
+
 
 /*
 #pragma mark - Navigation

@@ -65,6 +65,23 @@ static NSString * const consumerSecret = @"gct9SqIMVLVrEqu2F08VpXXhCsbdRqSrsw4pO
    }];
 }
 
+- (void)getTweetsWithScreenname: (NSString *) screenName completion:(void (^) (NSArray *tweets, NSError *error))completion {
+    NSString *url = [@"1.1/statuses/user_timeline.json?screen_name=" stringByAppendingString:screenName];
+    [self GET:url
+   parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, NSArray *  _Nullable tweetDictionaries) {
+       // Success
+       NSMutableArray *tweets  = [Tweet tweetsWithArray:tweetDictionaries];
+       
+       // Manually cache the tweets. If the request fails, restore from cache if possible.
+       NSData *data = [NSKeyedArchiver archivedDataWithRootObject:tweetDictionaries];
+       [[NSUserDefaults standardUserDefaults] setValue:data forKey:@"hometimeline_tweets"];
+       
+       completion(tweets, nil);
+   } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+       // There was a problem
+       completion(nil, error);
+   }];
+}
 
 
 - (void)postStatusWithText:(NSString *)text completion:(void (^)(Tweet *, NSError *))completion{

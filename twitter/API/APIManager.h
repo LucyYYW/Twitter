@@ -30,5 +30,6 @@
 
 - (void)getUserWithScreenname: (NSString *) screenName completion:(void (^) (User *, NSError *))completion;
 
+- (void)getTweetsWithScreenname: (NSString *) screenName completion:(void (^) (NSArray *tweets, NSError *error))completion;
 
 @end
