@@ -66,7 +66,9 @@ static NSString * const consumerSecret = @"gct9SqIMVLVrEqu2F08VpXXhCsbdRqSrsw4pO
 }
 
 - (void)getTweetsWithScreenname: (NSString *) screenName completion:(void (^) (NSArray *tweets, NSError *error))completion {
-    NSString *url = [@"1.1/statuses/user_timeline.json?screen_name=" stringByAppendingString:screenName];
+    //NSLog(screenName);
+    NSString *url = [NSString stringWithFormat:@"1.1/statuses/user_timeline.json?screen_name=%@", screenName];
+    
     [self GET:url
    parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, NSArray *  _Nullable tweetDictionaries) {
        // Success
