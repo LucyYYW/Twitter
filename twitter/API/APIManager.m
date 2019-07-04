@@ -65,6 +65,10 @@ static NSString * const consumerSecret = @"gct9SqIMVLVrEqu2F08VpXXhCsbdRqSrsw4pO
    }];
 }
 
+
+
+
+
 - (void)getTweetsWithScreenname: (NSString *) screenName completion:(void (^) (NSArray *tweets, NSError *error))completion {
     //NSLog(screenName);
     NSString *url = [NSString stringWithFormat:@"1.1/statuses/user_timeline.json?screen_name=%@", screenName];
@@ -146,19 +150,29 @@ static NSString * const consumerSecret = @"gct9SqIMVLVrEqu2F08VpXXhCsbdRqSrsw4pO
     }];
 }
 
-- (void) getUserWithScreenname:(NSString *)screenName completion:(void (^)(User *, NSError *))completion {
+- (void) getUserWithScreenname:(NSString *)screenName completion:(void (^)(NSDictionary *, NSError *))completion {
     NSString *urlString = [@"1.1/users/show.json?screen_name=" stringByAppendingString:screenName];
     
     [self GET:urlString parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary *  _Nullable userDictionary) {
-        User *user = [[User alloc]initWithDictionary:userDictionary];
-        completion(user, nil);
+        
+        completion(userDictionary, nil);
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         completion(nil, error);
     }];
 }
 
 
-- (void)reply:(Tweet *)tweet completion:(void (^)(Tweet *, NSError *))completion{
+- (void) getCurrentLoggedInUser:(void(^)(NSDictionary *userDictionary, NSError *error)) completion {
+    NSString *url = @"1.1/account/verify_credentials.json";
+    [self GET:url parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary *  _Nullable userDictionary) {
+        
+        completion(userDictionary, nil);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        completion(nil, error);
+    }];
+}
+
+- (void)replyWithText:(NSString *)text toTweet:(Tweet *)tweet completion:(void (^)(Tweet *, NSError *))completion{
     
     NSString *urlString = [NSString stringWithFormat:@"****idk*****", tweet.idStr];
     NSDictionary *parameters = @{@"id": tweet.idStr};
@@ -169,6 +183,7 @@ static NSString * const consumerSecret = @"gct9SqIMVLVrEqu2F08VpXXhCsbdRqSrsw4pO
         completion(nil, error);
     }];
 }
+
 
 
 

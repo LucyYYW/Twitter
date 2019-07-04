@@ -24,6 +24,7 @@
 		B97ED31422CD09A800024DBC /* DetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B97ED31322CD09A800024DBC /* DetailsViewController.m */; };
 		B9D69E6422CD38EC00F86F14 /* replyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9D69E6322CD38EC00F86F14 /* replyViewController.m */; };
 		B9D69E6722CD64BF00F86F14 /* profileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9D69E6622CD64BF00F86F14 /* profileViewController.m */; };
+		B9D69E6A22CEC1AD00F86F14 /* OtherProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9D69E6922CEC1AD00F86F14 /* OtherProfileViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -59,6 +60,8 @@
 		B9D69E6322CD38EC00F86F14 /* replyViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = replyViewController.m; sourceTree = "<group>"; };
 		B9D69E6522CD64BF00F86F14 /* profileViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = profileViewController.h; sourceTree = "<group>"; };
 		B9D69E6622CD64BF00F86F14 /* profileViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = profileViewController.m; sourceTree = "<group>"; };
+		B9D69E6822CEC1AD00F86F14 /* OtherProfileViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OtherProfileViewController.h; sourceTree = "<group>"; };
+		B9D69E6922CEC1AD00F86F14 /* OtherProfileViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OtherProfileViewController.m; sourceTree = "<group>"; };
 		E12A11AA0D36A74AC2E42782 /* Pods_twitter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_twitter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -164,6 +167,8 @@
 				B9D69E6322CD38EC00F86F14 /* replyViewController.m */,
 				B9D69E6522CD64BF00F86F14 /* profileViewController.h */,
 				B9D69E6622CD64BF00F86F14 /* profileViewController.m */,
+				B9D69E6822CEC1AD00F86F14 /* OtherProfileViewController.h */,
+				B9D69E6922CEC1AD00F86F14 /* OtherProfileViewController.m */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -300,6 +305,7 @@
 				6AD278F620BCB68B0085BC29 /* APIManager.m in Sources */,
 				6AD2790920BCC04D0085BC29 /* TimelineViewController.m in Sources */,
 				B9D69E6422CD38EC00F86F14 /* replyViewController.m in Sources */,
+				B9D69E6A22CEC1AD00F86F14 /* OtherProfileViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

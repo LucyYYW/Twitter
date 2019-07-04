@@ -1,35 +1,34 @@
 //
-//  profileViewController.m
+//  OtherProfileViewController.m
 //  twitter
 //
-//  Created by lucyyyw on 7/3/19.
+//  Created by lucyyyw on 7/4/19.
 //  Copyright © 2019 Emerson Malca. All rights reserved.
 //
 
-#import "profileViewController.h"
+#import "OtherProfileViewController.h"
 #import "User.h"
 #import "APIManager.h"
 #import "TTTAttributedLabel.h"
 #import "UIImageView+AFNetworking.h"
 #import "TweetCell.h"
 
-@interface profileViewController () <UITableViewDataSource,UITableViewDelegate,TTTAttributedLabelDelegate>
+@interface OtherProfileViewController () <UITableViewDataSource, UITableViewDelegate, TTTAttributedLabelDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *profileImageView;
 @property (weak, nonatomic) IBOutlet TTTAttributedLabel *userNameLabel;
 @property (weak, nonatomic) IBOutlet TTTAttributedLabel *screenNameLabel;
 @property (weak, nonatomic) IBOutlet TTTAttributedLabel *numTweetsLabel;
 @property (weak, nonatomic) IBOutlet TTTAttributedLabel *numFollowingLabel;
-@property (weak, nonatomic) IBOutlet TTTAttributedLabel *numFollowersLabel;
+@property (weak, nonatomic) IBOutlet UILabel *numFollowerLabel;
 @property (weak, nonatomic) IBOutlet UITableView *tweetsTableView;
 
 @property (nonatomic, strong) NSMutableArray *tweets;
 
 
-@property (strong,nonatomic) User *user;
 
 @end
 
-@implementation profileViewController
+@implementation OtherProfileViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -37,8 +36,18 @@
     self.tweetsTableView.dataSource = self;
     self.tweetsTableView.delegate = self;
     
-    [self getMyUserInfo];
-    //[self getUserInfo];
+    [self.profileImageView setImageWithURL:[NSURL URLWithString: self.user.profileImageUrl]];
+    self.userNameLabel.text = self.user.name;
+    self.screenNameLabel.text = [@"@" stringByAppendingString: self.user.screenName];
+    self.numTweetsLabel.text = [NSString stringWithFormat:@"%i tweets", self.user.tweetsCount];
+    self.numFollowingLabel.text = [NSString stringWithFormat:@"%i Following", self.user.followingCount];
+    NSMutableString *followerText = [[NSString stringWithFormat:@"%i Follower", self.user.followerCount] mutableCopy];
+    if (self.user.followerCount > 1) {
+        [followerText appendString:@"s"];
+    }
+    self.numFollowerLabel.text = followerText;
+    
+    [self getUserTweets];
     
     
     self.tweetsTableView.rowHeight = UITableViewAutomaticDimension;
@@ -46,7 +55,6 @@
 }
 
 /*
-
 - (void) getUserInfo {
     [[APIManager shared] getUserWithScreenname: @"MiSuerteCR7" completion:^(NSDictionary *userDictionary, NSError *error) {
         if (userDictionary) {
@@ -74,43 +82,11 @@
         
     }];
 }
-*/
+ */
 
-- (void) getMyUserInfo {
-    [[APIManager shared] getCurrentLoggedInUser: ^(NSDictionary *userDictionary, NSError *error) {
-        if (userDictionary) {
-            NSLog(@"😎😎😎 Successfully loaded user profile");
-            self.user = [[User alloc] initWithDictionary :userDictionary];
-            
-            [self.profileImageView setImageWithURL:[NSURL URLWithString: self.user.profileImageUrl]];
-            self.userNameLabel.text = self.user.name;
-            self.screenNameLabel.text = [@"@" stringByAppendingString: self.user.screenName];
-            self.numTweetsLabel.text = [NSString stringWithFormat:@"%i tweets", self.user.tweetsCount];
-            self.numFollowingLabel.text = [NSString stringWithFormat:@"%i Following", self.user.followingCount];
-            NSMutableString *followerText = [[NSString stringWithFormat:@"%i Follower", self.user.followerCount] mutableCopy];
-            if (self.user.followerCount > 1) {
-                [followerText appendString:@"s"];
-            }
-            self.numFollowersLabel.text = followerText;
-            
-            [self getUserTweets];
-            
-        } else {
-            NSLog(@"😫😫😫 Error getting user info: %@", error.localizedDescription);
-        }
-        
-        
-        
-    
-        
-    }];
-}
- 
- 
- 
 - (void) getUserTweets {
     
-    [[APIManager shared] getTweetsWithScreenname:self.user.screenName completion:^(NSArray *tweets, NSError *error) {
+    [[APIManager shared] getTweetsWithScreenname: self.user.screenName completion:^(NSArray *tweets, NSError *error) {
         if (tweets) {
             NSLog(@"😎😎😎 Successfully loaded user timeline");
             
@@ -130,10 +106,6 @@
         
     }];
 }
-
-
-
-
 
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
     TweetCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ProfileTweetCell"];
@@ -189,13 +161,13 @@
 
 
 /*
- #pragma mark - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
- }
- */
+#pragma mark - Navigation
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+}
+*/
 
 @end

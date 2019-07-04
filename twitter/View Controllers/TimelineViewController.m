@@ -16,9 +16,9 @@
 #import "LoginViewController.h"
 #import "DetailsViewController.h"
 #import "WebKit/WebKit.h"
+#import "OtherProfileViewController.h"
 
-
-@interface TimelineViewController () <ComposeViewControllerDelegate,UITableViewDataSource, UITableViewDelegate, TTTAttributedLabelDelegate>
+@interface TimelineViewController () <ComposeViewControllerDelegate,UITableViewDataSource, UITableViewDelegate, TTTAttributedLabelDelegate, TweetCellDelegate>
 
 @property (nonatomic, strong) NSMutableArray *tweets;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -104,6 +104,7 @@
     
     cell.tweetTextLabel.text = tweet.text;
     
+    cell.delegate = self;
 
     
     cell.replyLabel.text = [NSString stringWithFormat:@"%i", tweet.replyCount];
@@ -137,6 +138,29 @@
 }
 
 
+- (IBAction)onTapLogout:(id)sender {
+    AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    LoginViewController *loginViewController = [storyboard instantiateViewControllerWithIdentifier:@"LoginViewController"];
+    appDelegate.window.rootViewController = loginViewController;
+    
+    [[APIManager shared] logout];
+    
+}
+
+- (void)attributedLabel:(TTTAttributedLabel *)label
+   didSelectLinkWithURL:(NSURL *)url {
+    UIApplication *application = [UIApplication sharedApplication];
+    [application openURL:url options:@{} completionHandler:nil];
+    
+}
+
+- (void)tweetCell:(TweetCell *)tweetCell didTap:(User *)user{
+    // TODO: Perform segue to profile view controller
+    [self performSegueWithIdentifier:@"profileSegue" sender:user];
+}
+
  #pragma mark - Navigation
  
  // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -154,26 +178,14 @@
         detailsController.tweetCell = (TweetCell *) tappedCell;
         detailsController.tableView = self.tableView;
         
+    } else if ([segue.identifier isEqual: @"profileSegue"]) {
+        OtherProfileViewController *profileController = [segue destinationViewController];
+        profileController.user = sender;
+        
     }
     
 }
 
-- (IBAction)onTapLogout:(id)sender {
-    AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
-    
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    LoginViewController *loginViewController = [storyboard instantiateViewControllerWithIdentifier:@"LoginViewController"];
-    appDelegate.window.rootViewController = loginViewController;
-    
-    [[APIManager shared] logout];
-    
-}
 
-- (void)attributedLabel:(TTTAttributedLabel *)label
-   didSelectLinkWithURL:(NSURL *)url {
-    UIApplication *application = [UIApplication sharedApplication];
-    [application openURL:url options:@{} completionHandler:nil];
-
-}
 
 @end

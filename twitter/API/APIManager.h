@@ -26,10 +26,13 @@
 
 - (void)unretweet:(Tweet *)tweet completion:(void (^)(Tweet *, NSError *))completion;
 
-- (void) replyWithText: (NSString *) text toTweet: (Tweet *)tweet completion:(void (^)(Tweet *, NSError *))completion;
 
-- (void)getUserWithScreenname: (NSString *) screenName completion:(void (^) (User *, NSError *))completion;
+- (void)getUserWithScreenname: (NSString *) screenName completion:(void (^) (NSDictionary *, NSError *))completion;
 
 - (void)getTweetsWithScreenname: (NSString *) screenName completion:(void (^) (NSArray *tweets, NSError *error))completion;
+- (void) getCurrentLoggedInUser:(void(^)(NSDictionary *userDictionary, NSError *error)) completion;
+
+
+- (void) replyWithText: (NSString *) text toTweet: (Tweet *)tweet completion:(void (^)(Tweet *, NSError *))completion;
 
 @end
