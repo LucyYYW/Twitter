@@ -17,16 +17,24 @@
 #import "DetailsViewController.h"
 #import "WebKit/WebKit.h"
 #import "OtherProfileViewController.h"
+#import "InfiniteScrollActivityView.h"
 
-@interface TimelineViewController () <ComposeViewControllerDelegate,UITableViewDataSource, UITableViewDelegate, TTTAttributedLabelDelegate, TweetCellDelegate>
+@interface TimelineViewController () <ComposeViewControllerDelegate,UITableViewDataSource, UITableViewDelegate, TTTAttributedLabelDelegate, TweetCellDelegate, UIScrollViewDelegate>
 
 @property (nonatomic, strong) NSMutableArray *tweets;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
 
+@property NSString* threshold_id;
+
+
 @end
 
 @implementation TimelineViewController
+
+
+InfiniteScrollActivityView* loadingMoreView;
+bool isMoreDataLoading = false;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -34,6 +42,15 @@
     //2. (done in storyboard)Define a custom table view cell and set its reuse identifier
     //3. View controller becomes its dataSource and delegate in viewDidLoad
 
+    // Set up Infinite Scroll loading indicator
+    CGRect frame = CGRectMake(0, self.tableView.contentSize.height, self.tableView.bounds.size.width, InfiniteScrollActivityView.defaultHeight);
+    loadingMoreView = [[InfiniteScrollActivityView alloc] initWithFrame:frame];
+    loadingMoreView.hidden = true;
+    [self.tableView addSubview:loadingMoreView];
+    
+    UIEdgeInsets insets = self.tableView.contentInset;
+    insets.bottom += InfiniteScrollActivityView.defaultHeight;
+    self.tableView.contentInset = insets;
 
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
@@ -62,7 +79,7 @@
             
             //6. View controller stores that data passed into the completion handler
             self.tweets = [tweets mutableCopy];
-            
+
             //7. Reload the tableView now that there is new data
             [self.tableView reloadData];
             
@@ -89,6 +106,10 @@
     TweetCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TweetCell"];
     
     Tweet *tweet = self.tweets[indexPath.row];
+    
+    self.threshold_id = tweet.idStr;
+    
+    
     cell.tweet = tweet;
     
     NSURL *url = [NSURL URLWithString:tweet.user.profileImageUrl];
@@ -160,6 +181,56 @@
     // TODO: Perform segue to profile view controller
     [self performSegueWithIdentifier:@"profileSegue" sender:user];
 }
+
+-(void)loadMoreData{
+    [[APIManager shared] loadMoreHomeLineBefore:self.threshold_id completion:^(NSArray *tweets, NSError *error) {
+        if (tweets) {
+            NSLog(@"😎😎😎 Successfully loaded home timeline more");
+            isMoreDataLoading = false;
+            
+            [loadingMoreView stopAnimating];
+            
+            //6. View controller stores that data passed into the completion handler
+            [self.tweets addObjectsFromArray:tweets];
+            
+            
+            //7. Reload the tableView now that there is new data
+            [self.tableView reloadData];
+            
+            
+            
+        } else {
+            NSLog(@"😫😫😫 Error getting home timeline more: %@", error.localizedDescription);
+        }
+        
+        [self.refreshControl endRefreshing];
+    }];
+    
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    // Handle scroll behavior here
+    if(!isMoreDataLoading){
+        // Calculate the position of one screen length before the bottom of the results
+        int scrollViewContentHeight = self.tableView.contentSize.height;
+        int scrollOffsetThreshold = scrollViewContentHeight - self.tableView.bounds.size.height;
+        
+        // When the user has scrolled past the threshold, start requesting
+        if(scrollView.contentOffset.y > scrollOffsetThreshold && self.tableView.isDragging) {
+            isMoreDataLoading = true;
+            
+            // Update position of loadingMoreView, and start loading indicator
+            CGRect frame = CGRectMake(0, self.tableView.contentSize.height, self.tableView.bounds.size.width, InfiniteScrollActivityView.defaultHeight);
+            loadingMoreView.frame = frame;
+            [loadingMoreView startAnimating];
+            
+            // Code to load more results
+            [self loadMoreData];
+        }
+    }
+}
+
+
 
  #pragma mark - Navigation
  

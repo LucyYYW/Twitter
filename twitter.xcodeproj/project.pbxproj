@@ -25,6 +25,7 @@
 		B9D69E6422CD38EC00F86F14 /* replyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9D69E6322CD38EC00F86F14 /* replyViewController.m */; };
 		B9D69E6722CD64BF00F86F14 /* profileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9D69E6622CD64BF00F86F14 /* profileViewController.m */; };
 		B9D69E6A22CEC1AD00F86F14 /* OtherProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9D69E6922CEC1AD00F86F14 /* OtherProfileViewController.m */; };
+		B9D69E6D22CEF7FE00F86F14 /* InfiniteScrollActivityView.m in Sources */ = {isa = PBXBuildFile; fileRef = B9D69E6C22CEF7FE00F86F14 /* InfiniteScrollActivityView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -62,6 +63,8 @@
 		B9D69E6622CD64BF00F86F14 /* profileViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = profileViewController.m; sourceTree = "<group>"; };
 		B9D69E6822CEC1AD00F86F14 /* OtherProfileViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OtherProfileViewController.h; sourceTree = "<group>"; };
 		B9D69E6922CEC1AD00F86F14 /* OtherProfileViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OtherProfileViewController.m; sourceTree = "<group>"; };
+		B9D69E6B22CEF7FE00F86F14 /* InfiniteScrollActivityView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InfiniteScrollActivityView.h; sourceTree = "<group>"; };
+		B9D69E6C22CEF7FE00F86F14 /* InfiniteScrollActivityView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InfiniteScrollActivityView.m; sourceTree = "<group>"; };
 		E12A11AA0D36A74AC2E42782 /* Pods_twitter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_twitter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -159,6 +162,8 @@
 				6AD2790520BCC0380085BC29 /* LoginViewController.m */,
 				6AD2790720BCC04D0085BC29 /* TimelineViewController.h */,
 				6AD2790820BCC04D0085BC29 /* TimelineViewController.m */,
+				B9D69E6B22CEF7FE00F86F14 /* InfiniteScrollActivityView.h */,
+				B9D69E6C22CEF7FE00F86F14 /* InfiniteScrollActivityView.m */,
 				B97ED30F22CAE49800024DBC /* ComposeViewController.h */,
 				B97ED31022CAE49800024DBC /* ComposeViewController.m */,
 				B97ED31222CD09A800024DBC /* DetailsViewController.h */,
@@ -299,6 +304,7 @@
 				B97ED31122CAE49800024DBC /* ComposeViewController.m in Sources */,
 				6AD278E820BC4B970085BC29 /* main.m in Sources */,
 				B97ED30B22C86DA100024DBC /* Tweet.m in Sources */,
+				B9D69E6D22CEF7FE00F86F14 /* InfiniteScrollActivityView.m in Sources */,
 				6AD2790620BCC0380085BC29 /* LoginViewController.m in Sources */,
 				B9D69E6722CD64BF00F86F14 /* profileViewController.m in Sources */,
 				6AD278DA20BC4B950085BC29 /* AppDelegate.m in Sources */,
