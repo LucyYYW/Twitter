@@ -113,6 +113,10 @@
     
     self.tweetTextLabel.text = self.tweet.text;
     
+    if (self.tweet.containsMedia == YES) {
+        NSURL *mediaURL = [NSURL URLWithString:self.tweet.mediaURL];
+        [self.mediaImageView setImageWithURL:mediaURL];
+    }
     
     NSMutableString *retweetString = [@"" mutableCopy];
     if (self.tweet.retweetCount > 0) {

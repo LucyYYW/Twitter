@@ -27,6 +27,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong,nonatomic) Tweet *tweet;
 @property (strong,nonatomic) TweetCell *tweetCell;
 @property (strong,nonatomic) UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UIImageView *mediaImageView;
 
 @end
 
