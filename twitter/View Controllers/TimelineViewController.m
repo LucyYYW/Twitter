@@ -114,6 +114,13 @@ bool isMoreDataLoading = false;
     
     NSURL *url = [NSURL URLWithString:tweet.user.profileImageUrl];
     [cell.profileImageView setImageWithURL:url];
+    
+    if (tweet.containsMedia == YES) {
+        NSURL *mediaURL = [NSURL URLWithString:tweet.mediaURL];
+        [cell.mediaImageView setImageWithURL:mediaURL];
+    }
+    
+    
     cell.userNameLabel.text = tweet.user.name;
     cell.screenNameLabel.text = [@"@" stringByAppendingString: tweet.user.screenName];
     cell.dateLabel.text = (NSAttributedString *)tweet.timeAgoString;

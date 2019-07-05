@@ -25,6 +25,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic) NSString *createdAtString; // Display date
 @property (strong, nonatomic) NSString *timeAgoString;
 
+@property (strong, nonatomic) NSString *mediaURL;
+@property (nonatomic) BOOL containsMedia;
+
 @property (nonatomic) int replyCount;
 
 

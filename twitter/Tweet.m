@@ -33,7 +33,20 @@
         self.retweetCount = [dictionary[@"retweet_count"] intValue];
         self.retweeted = [dictionary[@"retweeted"] boolValue];
         
+        self.containsMedia = NO;
+        NSDictionary *entities = dictionary[@"entities"];
+        if (entities) {
+            NSDictionary *media = entities[@"media"][0];
+            if (media[@"media_url_https"]) {
+                self.mediaURL = media[@"media_url_https"];
+                self.containsMedia = YES;
+            }
+        }
+        //self.mediaURL = ((dictionary[@"entities"])[@"media"])[@"media_url_https"];
+        
         self.replyCount = [dictionary[@"reply_count"] intValue];
+        
+        
         
         
         // TODO: initialize user
