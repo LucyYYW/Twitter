@@ -12,6 +12,7 @@
 #import "TTTAttributedLabel.h"
 #import "UIImageView+AFNetworking.h"
 #import "TweetCell.h"
+#import "WebKit/WebKit.h"
 
 @interface profileViewController () <UITableViewDataSource,UITableViewDelegate,TTTAttributedLabelDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *profileImageView;

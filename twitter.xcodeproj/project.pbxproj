@@ -26,6 +26,7 @@
 		B9D69E6722CD64BF00F86F14 /* profileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9D69E6622CD64BF00F86F14 /* profileViewController.m */; };
 		B9D69E6A22CEC1AD00F86F14 /* OtherProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9D69E6922CEC1AD00F86F14 /* OtherProfileViewController.m */; };
 		B9D69E6D22CEF7FE00F86F14 /* InfiniteScrollActivityView.m in Sources */ = {isa = PBXBuildFile; fileRef = B9D69E6C22CEF7FE00F86F14 /* InfiniteScrollActivityView.m */; };
+		B9DA105922CFC30A00D0ED5C /* MentionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9DA105822CFC30A00D0ED5C /* MentionsViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -65,6 +66,8 @@
 		B9D69E6922CEC1AD00F86F14 /* OtherProfileViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OtherProfileViewController.m; sourceTree = "<group>"; };
 		B9D69E6B22CEF7FE00F86F14 /* InfiniteScrollActivityView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InfiniteScrollActivityView.h; sourceTree = "<group>"; };
 		B9D69E6C22CEF7FE00F86F14 /* InfiniteScrollActivityView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InfiniteScrollActivityView.m; sourceTree = "<group>"; };
+		B9DA105722CFC30A00D0ED5C /* MentionsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MentionsViewController.h; sourceTree = "<group>"; };
+		B9DA105822CFC30A00D0ED5C /* MentionsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MentionsViewController.m; sourceTree = "<group>"; };
 		E12A11AA0D36A74AC2E42782 /* Pods_twitter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_twitter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -174,6 +177,8 @@
 				B9D69E6622CD64BF00F86F14 /* profileViewController.m */,
 				B9D69E6822CEC1AD00F86F14 /* OtherProfileViewController.h */,
 				B9D69E6922CEC1AD00F86F14 /* OtherProfileViewController.m */,
+				B9DA105722CFC30A00D0ED5C /* MentionsViewController.h */,
+				B9DA105822CFC30A00D0ED5C /* MentionsViewController.m */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -312,6 +317,7 @@
 				6AD2790920BCC04D0085BC29 /* TimelineViewController.m in Sources */,
 				B9D69E6422CD38EC00F86F14 /* replyViewController.m in Sources */,
 				B9D69E6A22CEC1AD00F86F14 /* OtherProfileViewController.m in Sources */,
+				B9DA105922CFC30A00D0ED5C /* MentionsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

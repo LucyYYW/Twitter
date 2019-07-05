@@ -33,7 +33,7 @@
 - (void) getCurrentLoggedInUser:(void(^)(NSDictionary *userDictionary, NSError *error)) completion;
 
 - (void)loadMoreHomeLineBefore: (NSString*) id completion: (void(^)(NSArray *tweets, NSError *error))completion;
-
+- (void)getMentionsTimelineWithCompletion:(void(^)(NSArray *tweets, NSError *error))completion;
 
 - (void) replyWithText: (NSString *) text toTweet: (Tweet *)tweet completion:(void (^)(Tweet *, NSError *))completion;
 
