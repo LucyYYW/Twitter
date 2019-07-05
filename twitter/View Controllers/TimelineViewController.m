@@ -125,6 +125,7 @@ bool isMoreDataLoading = false;
     
     cell.tweetTextLabel.text = tweet.text;
     
+    
     cell.delegate = self;
 
     

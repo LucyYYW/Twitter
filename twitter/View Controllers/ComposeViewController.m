@@ -9,8 +9,9 @@
 #import "ComposeViewController.h"
 #import "APIManager.h"
 #import "TimelineViewController.h"
+#import "UITextView+Placeholder.h"
 
-@interface ComposeViewController ()
+@interface ComposeViewController () <UITextViewDelegate>
 @property (weak, nonatomic) IBOutlet UITextView *postTextView;
 
 @end
@@ -19,7 +20,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.postTextView.delegate = self;
     // Do any additional setup after loading the view.
+    self.postTextView.placeholder = @"What's happening?";
+    self.postTextView.placeholderColor = [UIColor lightGrayColor]; // optional
 }
 
 - (IBAction)onTweet:(id)sender {
@@ -36,18 +40,26 @@
     }];
     [self dismissViewControllerAnimated:true completion: nil];
 }
-        
-        
-    
-    
-    
-    
-    
 
 
 - (IBAction)onClose:(id)sender {
     [self dismissViewControllerAnimated:true completion: nil];
     
+}
+
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text{
+    // TODO: Check the proposed new text character count
+    // Allow or disallow the new text
+    // Set the max character limit
+    int characterLimit = 140;
+    
+    // Construct what the new text would be if we allowed the user's latest edit
+    NSString *newText = [self.postTextView.text stringByReplacingCharactersInRange:range withString:text];
+    
+    // TODO: Update Character Count Label
+    
+    // The new text should be allowed? True/False
+    return newText.length < characterLimit;
 }
 
 /*

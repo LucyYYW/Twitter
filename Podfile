@@ -9,6 +9,8 @@ target 'twitter' do
   pod 'AFNetworking'
   pod 'BDBOAuth1Manager'
   pod 'DateTools'
+  pod 'RSKPlaceholderTextView'
+  pod 'UITextView+Placeholder'
   
   use_frameworks!
   pod 'TTTAttributedLabel'
