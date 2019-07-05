@@ -210,9 +210,10 @@ static NSString * const consumerSecret = @"gct9SqIMVLVrEqu2F08VpXXhCsbdRqSrsw4pO
 
 - (void)replyWithText:(NSString *)text toTweet:(Tweet *)tweet completion:(void (^)(Tweet *, NSError *))completion{
     
-    NSString *urlString = [NSString stringWithFormat:@"****idk*****", tweet.idStr];
-    NSDictionary *parameters = @{@"id": tweet.idStr};
-    [self POST:urlString parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary *  _Nullable tweetDictionary) {
+    NSString *url = @"1.1/statuses/update.json";
+    NSString *statusText = [NSString stringWithFormat: @"@%@ %@",tweet.user.screenName, text];
+    NSDictionary *parameters = @{@"status": statusText, @"in_reply_to_status_id":tweet.idStr};
+    [self POST:url parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary *  _Nullable tweetDictionary) {
         Tweet *tweet = [[Tweet alloc]initWithDictionary:tweetDictionary];
         completion(tweet, nil);
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
