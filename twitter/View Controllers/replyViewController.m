@@ -40,7 +40,7 @@
         }
         
     }];
-    [self.tableView reloadData];
+   
     [self dismissViewControllerAnimated:true completion: nil];
 }
 

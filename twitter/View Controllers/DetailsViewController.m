@@ -168,7 +168,7 @@
     UINavigationController *navigationController = [segue destinationViewController];
     replyViewController *replyController = (replyViewController*)navigationController.topViewController;
     replyController.tweet = self.tweet;
-    replyController.tableView = self.tableView;
+    //replyController.tableView = self.tableView;
 }
 
 @end

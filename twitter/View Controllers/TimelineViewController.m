@@ -108,13 +108,19 @@ bool isMoreDataLoading = false;
     
     Tweet *tweet = self.tweets[indexPath.row];
     
-    self.threshold_id = tweet.idStr;
+    if (!self.threshold_id) {
+        self.threshold_id = tweet.idStr;
+    } else if (([self.threshold_id length] > [self.threshold_id length]) | (([self.threshold_id length] > [self.threshold_id length]) & ([self.threshold_id intValue] > [tweet.idStr intValue]))) {
+        self.threshold_id = tweet.idStr;
+    }
+    
     
     
     cell.tweet = tweet;
     
     NSURL *url = [NSURL URLWithString:tweet.user.profileImageUrl];
     [cell.profileImageView setImageWithURL:url];
+    
     
     if (tweet.containsMedia == YES) {
         NSURL *mediaURL = [NSURL URLWithString:tweet.mediaURL];
@@ -270,6 +276,7 @@ bool isMoreDataLoading = false;
         UINavigationController *navigationController = [segue destinationViewController];
         replyViewController *replyController = (replyViewController*)navigationController.topViewController;
         replyController.tweet = sender;
+        //replyController.tableView = self.tableView;
     }
     
 }

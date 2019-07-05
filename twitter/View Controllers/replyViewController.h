@@ -17,8 +17,8 @@ NS_ASSUME_NONNULL_BEGIN
 @interface replyViewController : UIViewController
 
 @property (strong, nonatomic) Tweet *tweet;
-
-@property (strong, nonatomic) UITableView *tableView;
+//@property (strong, nonatomic) NSMutableArray *tweets;
+//@property (strong, nonatomic) UITableView *tableView;
 
 @end
 
