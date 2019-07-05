@@ -18,6 +18,7 @@
 #import "WebKit/WebKit.h"
 #import "OtherProfileViewController.h"
 #import "InfiniteScrollActivityView.h"
+#import "replyViewController.h"
 
 @interface TimelineViewController () <ComposeViewControllerDelegate,UITableViewDataSource, UITableViewDelegate, TTTAttributedLabelDelegate, TweetCellDelegate, UIScrollViewDelegate>
 
@@ -190,6 +191,10 @@ bool isMoreDataLoading = false;
     [self performSegueWithIdentifier:@"profileSegue" sender:user];
 }
 
+- (void)replyTweetCell:(TweetCell *) tweetCell didTap:(Tweet *)tweet{
+    [self performSegueWithIdentifier:@"replyFromHome" sender:tweet];
+}
+
 -(void)loadMoreData{
     [[APIManager shared] loadMoreHomeLineBefore:self.threshold_id completion:^(NSArray *tweets, NSError *error) {
         if (tweets) {
@@ -261,6 +266,10 @@ bool isMoreDataLoading = false;
         OtherProfileViewController *profileController = [segue destinationViewController];
         profileController.user = sender;
         
+    } else if ([segue.identifier isEqual: @"replyFromHome"]) {
+        UINavigationController *navigationController = [segue destinationViewController];
+        replyViewController *replyController = (replyViewController*)navigationController.topViewController;
+        replyController.tweet = sender;
     }
     
 }

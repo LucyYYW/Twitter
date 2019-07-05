@@ -20,7 +20,9 @@
     [self.profileImageView addGestureRecognizer:profileTapGestureRecognizer];
     [self.profileImageView setUserInteractionEnabled:YES];
     
-    
+    UITapGestureRecognizer *replyTapGestureRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(didTapReply:)];
+    [self.replyButton addGestureRecognizer:replyTapGestureRecognizer];
+    [self.replyButton setUserInteractionEnabled:YES];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -125,6 +127,10 @@
     
 }
 
+- (void) didTapReply:(UITapGestureRecognizer *)sender{
+    // TODO: Call method on delegate
+    [self.delegate replyTweetCell:self didTap:self.tweet];
+}
 
 
 

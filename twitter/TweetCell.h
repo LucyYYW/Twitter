@@ -47,6 +47,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @protocol TweetCellDelegate
 - (void)tweetCell:(TweetCell *) tweetCell didTap: (User *)user;
+- (void)replyTweetCell:(TweetCell *) tweetCell didTap: (Tweet *)tweet;
 @end
 
 
