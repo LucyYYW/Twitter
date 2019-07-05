@@ -143,7 +143,7 @@
 
 - (void)tweetCell:(TweetCell *)tweetCell didTap:(User *)user{
     // TODO: Perform segue to profile view controller
-    [self performSegueWithIdentifier:@"MentionSegue" sender:user];
+    [self performSegueWithIdentifier:@"MentionProfile" sender:user];
 }
 
 

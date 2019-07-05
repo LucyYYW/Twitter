@@ -460,7 +460,7 @@
                     <navigationItem key="navigationItem" title="Mentions" id="0T4-9t-Zaj"/>
                     <connections>
                         <outlet property="mentionTableView" destination="Xpr-mD-KbV" id="TX1-Ek-ARw"/>
-                        <segue destination="sZX-uk-t9L" kind="show" identifier="mentionProfile" id="bhm-aT-ggl"/>
+                        <segue destination="sZX-uk-t9L" kind="show" identifier="MentionProfile" id="bhm-aT-ggl"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Fka-6d-Y0b" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1205,6 +1205,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="YKi-Xg-EFH"/>
-        <segue reference="nXs-wu-dej"/>
+        <segue reference="bhm-aT-ggl"/>
     </inferredMetricsTieBreakers>
 </document>
